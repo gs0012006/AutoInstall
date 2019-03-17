@@ -51,11 +51,11 @@ public class AutoInstall {
 	
 		String classPath = AutoInstall.class.getProtectionDomain().getCodeSource().getLocation().getFile();
 		String cmd1 = "cmd.exe /c mkdir " + S + "\\data";
-		String cmd2 = "cmd.exe /c mkdir " + S + "\\pro";
+	
 		//String cmd5 = "cmd.exe /c jar -xvf " + classPath;
 		//String cmd4 = "cmd.exe /c " + S + "\\UnRAR e " + S + "\\data.rar " + S + "\\data";
 		excute(cmd1);
-		excute(cmd2);
+	
 		//excute(cmd5);
 		//excute(cmd4);
 		String lookAndFeel = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
