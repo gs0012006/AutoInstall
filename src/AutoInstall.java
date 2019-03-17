@@ -45,7 +45,7 @@ public class AutoInstall {
 	static String currentfilename="";//当前下载文件名
 	static String currentfilepathString ="";//当前文件下载路径
 	static boolean iscompletedown = false;//下载完成标志
-	static long totalf = 0; 
+	static long totalf = 0; ///
 	static  FTPFile[] files1;
 	public static void main(String[] args) throws Exception {
 	
