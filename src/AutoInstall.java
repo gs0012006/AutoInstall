@@ -103,16 +103,16 @@ public class AutoInstall {
 		ftpc.login("pbcpl", "password");
 		System.out.println("login ftpc ok ...");
 		fUp.login();
-		String remoteRoot = "/";
+		String remoteRoot = "/auto/";
 		fUp.sendCommand(remoteRoot);
 		List fileList = fUp.fileNames(remoteRoot);
 		filesnum = fileList.size();
-		FTPListParseEngine engine = ftpc.initiateListParsing("/");
+		FTPListParseEngine engine = ftpc.initiateListParsing("/auto/");
 		System.out.println(engine);
 		while(engine.hasNext()){  
              files1 = engine.getNext(50); 
              System.out.println(files1.length);
-            for(int c=0;c<files1.length;c++){  
+            for(int c=2;c<files1.length;c++){  
                 //获取文件名  
               System.out.println(files1[c].getName());  
                 //获取文件大小  
@@ -123,9 +123,9 @@ public class AutoInstall {
         } 
 		Thread thirdThread  =  new Thread(new downprogressbar());
 		Future future3 = executorService.submit(thirdThread);
-		for (int i = 0; i < fileList.size(); i++) {
+		for (int i = 2; i < files1.length; i++) {
 			downallfiles.trans=0;
-			String fileName = fileList.get(i).toString();
+			String fileName = files1[i].getName();
 			currentfilename = fileName;
 			currentfileindex = i+1;
 			 //获取文件大小  
@@ -224,10 +224,10 @@ public class AutoInstall {
 			//		+ mask + " " + netgate;
 			//String cmd7 = S + "\\nircmd.exe /c /b elevate netsh interface ip set dns name=\"WLAN\" static " + dns1;
 			
-			String cmd6 = "cmd.exe /c "+ S + "\\nircmd.exe elevate netsh interface ip set address name=\"WLAN\" static " + ip + " "
+			String cmd6 = "cmd.exe /c netsh interface ip set address name=\"WLAN\" static " + ip + " "
 					+ mask + " " + netgate;
 			
-			String cmd7 = "cmd.exe /c "+ S + "\\nircmd.exe elevate netsh interface ip set dns name=\"WLAN\" static " + dns1;
+			String cmd7 = "cmd.exe /c netsh interface ip set dns name=\"WLAN\" static " + dns1;
 			excute(cmd6);
 			excute(cmd7);
 			try {
@@ -251,9 +251,10 @@ public class AutoInstall {
 		public void run() {
 			// TODO Auto-generated method stu
 
-			String cmd6 = "cmd.exe /C start /b "+ S + "\\data\\setup.cmd" ;
-			excute(cmd6);
-		
+			//String cmd6 = "cmd.exe /C start /b "+ S + "\\data\\setup.cmd" ;
+			//excute(cmd6);
+			new g().ge();
+			
 		}
 		
 		

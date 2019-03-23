@@ -16,7 +16,7 @@ import javax.swing.JProgressBar;
 public class downprogressbar implements Runnable{
 		JFrame jf = new JFrame();
 		JProgressBar jpb = new JProgressBar();
-		JLabel jl = new JLabel("文件下载中");
+		JLabel jl = new JLabel("下载失败，请关闭程序后重试");
 	
 		
 		public downprogressbar() {
@@ -31,8 +31,8 @@ public class downprogressbar implements Runnable{
 			c.add(jpb);
 			jf.setSize(600, 100);
 			jf.setLocationRelativeTo(null);
-			jpb.setMaximum(100);
-			jpb.setMinimum(0);
+			//jpb.setMaximum(100);
+			//jpb.setMinimum(0);
 			jpb.setStringPainted(true);//设置进度条显示提示信息		
 			jf.setAlwaysOnTop(true);
 		}
@@ -48,9 +48,9 @@ public class downprogressbar implements Runnable{
 		//	System.out.println("third tdddddffdfdfd");
 			//System.out.println("haha"+downallfiles.trans);
 			//System.out.println("haha"+AutoInstall.totalf);
-			
+			System.out.println(AutoInstall.totalf);
 			int v = (int) (downallfiles.trans*100/AutoInstall.totalf);
-			//System.out.println(v);
+			
 
 			to =Integer.toString(AutoInstall.filesnum)+"个文件待下载，正在下载第"+Integer.toString(AutoInstall.currentfileindex)+AutoInstall.currentfilename+"文件大小为"+AutoInstall.totalsize+"已经下载了"+downallfiles.trans/1024+"kb";
 			jl.setText(to);
