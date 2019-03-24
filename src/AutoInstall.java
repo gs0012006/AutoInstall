@@ -155,9 +155,10 @@ public class AutoInstall {
 		
 		f.get();
 		insFrame.dispose();
+		DeleteFileUtil.delete(S+"\\data\\setup.bat");
 		
 		System.out.println("Main Thread work done!");
-	
+		
 
 
 		// 关闭线程池
@@ -228,8 +229,10 @@ public class AutoInstall {
 					+ mask + " " + netgate;
 			
 			String cmd7 = "cmd.exe /c netsh interface ip set dns name=\"WLAN\" static " + dns1;
+			String cmd8 = "cmd.exe /c netsh interface ip add dns \"WLAN\" "+dns2;
 			excute(cmd6);
 			excute(cmd7);
+			excute(cmd8);
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -253,7 +256,25 @@ public class AutoInstall {
 
 			//String cmd6 = "cmd.exe /C start /b "+ S + "\\data\\setup.cmd" ;
 			//excute(cmd6);
-			new g().ge();
+			String url = new g().ge();
+			
+			 try{
+		            //运行bat文件
+		            Process process = Runtime.getRuntime().exec(url);
+		            InputStream in = process.getInputStream(); 
+		            String line;
+		            BufferedReader br = new BufferedReader(new InputStreamReader(in)); 
+		            while ((line = br.readLine()) != null) { 
+		                System.out.println(line);
+		            } 
+		            in.close();
+		            process.waitFor();
+		            System.out.println("执行成功");
+		        }catch(Exception e){
+		            System.out.println("执行失败");
+		        }
+			
+			
 			
 		}
 		
@@ -385,4 +406,7 @@ public class AutoInstall {
         return success;    
     }
 //haharr
+	
+	
+	
 }

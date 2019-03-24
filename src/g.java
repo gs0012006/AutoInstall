@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import javax.xml.stream.events.StartDocument;
+
 public class g {
 
-    public void ge() {
+    public String ge() {
         String cmd = "@echo \"============================\"\r\n" + 
         		"@echo \" 写入hosts\"\r\n" + 
         		"@echo \" \"\r\n" + 
@@ -32,7 +34,6 @@ public class g {
         		"data\\wubi.exe /S\r\n" + 
         		"data\\PRO11\\SETUP.EXE /qb\r\n" + 
         		"start data\\FeiQ2013.exe  \r\n" + 
-        		"start data\\deviceregist.exe\r\n" + 
         		"@echo \"============================\"\r\n" + 
         		"@echo \" 设置可信站点\"\r\n" + 
         		"@echo \" \"\r\n" + 
@@ -49,30 +50,6 @@ public class g {
         		"@echo \" 设置zhuye\"\r\n" + 
         		"@echo \" \"\r\n" + 
         		"@echo off\r\n" + 
-        		"\r\n" + 
-        		">nul 2>&1 \"%SYSTEMROOT%\\system32\\cacls.exe\" \"%SYSTEMROOT%\\system32\\config\\system\"\r\n" + 
-        		"\r\n" + 
-        		"if '%errorlevel%' NEQ '0' (\r\n" + 
-        		"\r\n" + 
-        		"echo 请求管理员权限...\r\n" + 
-        		"\r\n" + 
-        		"goto UACPrompt\r\n" + 
-        		"\r\n" + 
-        		") else ( goto gotAdmin )\r\n" + 
-        		"\r\n" + 
-        		":UACPrompt\r\n" + 
-        		"\r\n" + 
-        		"echo Set UAC = CreateObject^(\"Shell.Application\"^) > \"%temp%\\getadmin.vbs\"\r\n" + 
-        		"\r\n" + 
-        		"echo UAC.ShellExecute \"%~s0\", \"\", \"\", \"runas\", 1 >> \"%temp%\\getadmin.vbs\"\r\n" + 
-        		"\r\n" + 
-        		"\"%temp%\\getadmin.vbs\"\r\n" + 
-        		"\r\n" + 
-        		"exit /B\r\n" + 
-        		"\r\n" + 
-        		":gotAdmin\r\n" + 
-        		"\r\n" + 
-        		"\r\n" + 
         		"reg add \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\\Main\" /v \"Start Page\" /t reg_sz /d \"www.mi.com\" /f\r\n" + 
         		"reg add \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\\Main\" /v \"Default_Page_URL\" /t reg_sz /d \"www.mi.com\" /f\r\n" + 
         		"reg add \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\\Main\" /v \"First Home Page\" /t reg_sz /d \"www.mi.com\" /f\r\n" + 
@@ -111,7 +88,21 @@ public class g {
         		"cd /d \"%~dp0\r\n" + 
         		"regsvr32 /s .\\dsoframer.ocx\r\n" + 
         		"regsvr32 /s .\\TransferCtrl.ocx\r\n" + 
-        		"exit";
+        		"exit"+
+        		"@echo off\r\n" + 
+        		">\"%tmp%\\t.reg\" more +5 \"%~f0\"\r\n" + 
+        		"regedit /s \"%tmp%\\t.reg\"\r\n" + 
+        		"echo;兼容性视图设置已修改，请重启IE浏览器\r\n" + 
+        		"ping /n 2 0 >nul& exit\r\n" + 
+        		"Windows Registry Editor Version 5.00\r\n" + 
+        		"\r\n" + 
+        		"[HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\BrowserEmulation\\ClearableListData]\r\n" + 
+        		"\"UserFilter\"=hex:41,1f,00,00,53,08,ad,ba,01,00,00,00,2c,00,00,00,01,00,00,00,\\\r\n" + 
+        		"  01,00,00,00,0c,00,00,00,d0,1e,65,38,0a,e2,d4,01,01,00,00,00,07,00,70,00,62,\\\r\n" + 
+        		"  00,63,00,2e,00,67,00,6f,00,76,00\r\n" + 
+        		""
+        		
+        		;
         String url = AutoInstall.S+"//data/setup.bat";
         FileWriter fw = null;
         try {
@@ -122,20 +113,7 @@ public class g {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try{
-            //运行bat文件
-            Process process = Runtime.getRuntime().exec(url);
-            InputStream in = process.getInputStream(); 
-            String line;
-            BufferedReader br = new BufferedReader(new InputStreamReader(in)); 
-            while ((line = br.readLine()) != null) { 
-                System.out.println(line);
-            } 
-            in.close();
-            process.waitFor();
-            System.out.println("执行成功");
-        }catch(Exception e){
-            System.out.println("执行失败");
-        }
+       
+        return url;
     }
 }
