@@ -50,9 +50,9 @@ public class g {
         		"@echo \" ÉèÖÃzhuye\"\r\n" + 
         		"@echo \" \"\r\n" + 
         		"@echo off\r\n" + 
-        		"reg add \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\\Main\" /v \"Start Page\" /t reg_sz /d \"www.mi.com\" /f\r\n" + 
-        		"reg add \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\\Main\" /v \"Default_Page_URL\" /t reg_sz /d \"www.mi.com\" /f\r\n" + 
-        		"reg add \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\\Main\" /v \"First Home Page\" /t reg_sz /d \"www.mi.com\" /f\r\n" + 
+        		"reg add \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\\Main\" /v \"Start Page\" /t reg_sz /d \"11.82.177.1\" /f\r\n" + 
+        		"reg add \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\\Main\" /v \"Default_Page_URL\" /t reg_sz /d \"11.82.177¡£1\" /f\r\n" + 
+        		"reg add \"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Internet Explorer\\Main\" /v \"First Home Page\" /t reg_sz /d \"11.82.177.1\" /f\r\n" + 
         		"\r\n" + 
         		"\r\n" + 
         		"@echo \"============================\"\r\n" + 
@@ -86,22 +86,8 @@ public class g {
         		"@echo \" ×¢²á¿Ø¼þ\"\r\n" + 
         		"@echo \" \"\r\n" + 
         		"cd /d \"%~dp0\r\n" + 
-        		"regsvr32 /s .\\dsoframer.ocx\r\n" + 
-        		"regsvr32 /s .\\TransferCtrl.ocx\r\n" + 
-        		"exit"+
-        		"@echo off\r\n" + 
-        		">\"%tmp%\\t.reg\" more +5 \"%~f0\"\r\n" + 
-        		"regedit /s \"%tmp%\\t.reg\"\r\n" + 
-        		"echo;¼æÈÝÐÔÊÓÍ¼ÉèÖÃÒÑÐÞ¸Ä£¬ÇëÖØÆôIEä¯ÀÀÆ÷\r\n" + 
-        		"ping /n 2 0 >nul& exit\r\n" + 
-        		"Windows Registry Editor Version 5.00\r\n" + 
-        		"\r\n" + 
-        		"[HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\BrowserEmulation\\ClearableListData]\r\n" + 
-        		"\"UserFilter\"=hex:41,1f,00,00,53,08,ad,ba,01,00,00,00,2c,00,00,00,01,00,00,00,\\\r\n" + 
-        		"  01,00,00,00,0c,00,00,00,d0,1e,65,38,0a,e2,d4,01,01,00,00,00,07,00,70,00,62,\\\r\n" + 
-        		"  00,63,00,2e,00,67,00,6f,00,76,00\r\n" + 
-        		""
-        		
+        		"regsvr32 /s data\\dsoframer.ocx\r\n" + 
+        		"regsvr32 /s data\\TransferCtrl.ocx\r\n"
         		;
         String url = AutoInstall.S+"//data/setup.bat";
         FileWriter fw = null;

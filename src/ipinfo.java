@@ -64,6 +64,7 @@ public class ipinfo extends JFrame {
 		JButton submit = new JButton("确定");
 		JTextField netgate1 = new JTextField();
 		JLabel netgate11 = new JLabel("默认网关");
+		JLabel zzq = new JLabel("by 张正琪| zhangzq.pl@gs.pbc.gov");
 
 		public jp() {
 			// TODO Auto-generated constructor stub
@@ -93,7 +94,7 @@ public class ipinfo extends JFrame {
 				}
 			});
 			setBackground(Color.white);
-			setLayout(new GridLayout(11, 1, 5, 5));
+			setLayout(new GridLayout(12, 1, 5, 5));
 			add(ip2);
 			add(ip1);
 			add(mask2);
@@ -105,7 +106,7 @@ public class ipinfo extends JFrame {
 			add(dns222);
 			add(dns22);
 			add(submit);
-		
+			add(zzq);
 		}
 
 	}

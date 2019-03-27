@@ -10,6 +10,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPListParseEngine;
 import org.apache.commons.net.ftp.FTPReply;
 
+import com.sun.java.swing.plaf.windows.WindowsBorders;
 import com.sun.org.apache.bcel.internal.generic.AllocationInstruction;
 
 import sun.net.TransferProtocolClient;
@@ -84,7 +86,7 @@ public class AutoInstall {
 		JFrame frame = new checkingnet();
 		future2.get();
 		System.out.println("se ok");
-		if (isConnect("127.0.0.1")) {
+		if (isConnect("11.82.177.7")) {
 			
 		}
 		else {
@@ -97,9 +99,9 @@ public class AutoInstall {
 	
 		
 		//downFile("127.0.0.1", 21, "pbcpl", "password", "/w", "plink.exe", AutoInstall.S);
-		downallfiles fUp = new downallfiles("127.0.0.1", 21, "pbcpl", "password");
+		downallfiles fUp = new downallfiles("11.82.177.7", 21, "pbcpl", "password");
 		FTPClient ftpc = new FTPClient();
-		ftpc.connect("127.0.0.1");//192.3.191.159
+		ftpc.connect("11.82.177.7");//192.3.191.159
 		ftpc.login("pbcpl", "password");
 		System.out.println("login ftpc ok ...");
 		fUp.login();
@@ -224,15 +226,42 @@ public class AutoInstall {
 			//String cmd6 = S + "\\nircmd.exe /c /b elevate netsh interface ip set address name=\"WLAN\" static " + ip + " "
 			//		+ mask + " " + netgate;
 			//String cmd7 = S + "\\nircmd.exe /c /b elevate netsh interface ip set dns name=\"WLAN\" static " + dns1;
+			String cmd6;
+			String cmd7;
+			String cmd8;
+			String cmd9;
 			
-			String cmd6 = "cmd.exe /c netsh interface ip set address name=\"WLAN\" static " + ip + " "
-					+ mask + " " + netgate;
+			String osName = System.getProperty("os.name");//获取指定键（即os.name）的系统属性,如：Windows 7。
+		
+	if (osName.equals("Windows XP")) {
+		
+
+		 cmd6 = "cmd.exe /c  netsh interface ip set address name=\"本地连接\" source=static addr=" + ip + " "
+				+ "mask="+mask;
+		 cmd9=  "cmd.exe /c  netsh interface ip set address name=\"本地连接\" gateway="+netgate+" gwmetric=0";
+		 cmd7 = "cmd.exe /c  netsh interface ip set dns name=\"本地连接\" source=static addr=" + dns1;
+		 cmd8 = "cmd.exe /c echo pp";
+		
+	}
+	
+	else {
+		
+		
+		
+		 cmd6 = "cmd.exe /c  netsh interface ip set address name=\"本地连接\" static " + ip + " "
+				+ mask + " " + netgate;
+		
+		 cmd7 = "cmd.exe /c  netsh interface ip set dns name=\"本地连接\" static " + dns1;
+		 cmd8 = "cmd.exe /c  netsh interface ip add dns \"本地连接\" "+dns2;
+		 cmd9="cmd.exe /c echo pp";
+		
+	}
 			
-			String cmd7 = "cmd.exe /c netsh interface ip set dns name=\"WLAN\" static " + dns1;
-			String cmd8 = "cmd.exe /c netsh interface ip add dns \"WLAN\" "+dns2;
+		
 			excute(cmd6);
 			excute(cmd7);
 			excute(cmd8);
+			excute(cmd9);
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {

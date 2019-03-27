@@ -22,7 +22,7 @@ public class checkingnet extends JFrame {
 		c.add(bar);
 		setVisible(true);
 		setLocationRelativeTo(null); 
-		setAlwaysOnTop(true);
+
 	}
 	
 

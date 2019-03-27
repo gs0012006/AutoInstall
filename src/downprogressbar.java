@@ -52,7 +52,7 @@ public class downprogressbar implements Runnable{
 			int v = (int) (downallfiles.trans*100/AutoInstall.totalf);
 			
 
-			to =Integer.toString(AutoInstall.filesnum)+"个文件待下载，正在下载第"+Integer.toString(AutoInstall.currentfileindex)+AutoInstall.currentfilename+"文件大小为"+AutoInstall.totalsize+"已经下载了"+downallfiles.trans/1024+"kb";
+			to =Integer.toString(AutoInstall.filesnum)+"个文件待下载，正在下载第"+Integer.toString(AutoInstall.currentfileindex)+AutoInstall.currentfilename+"文件大小为"+AutoInstall.totalsize;
 			jl.setText(to);
 			jpb.setValue(v);
 			jpb.setString(Integer.toString(v)+"%");//设置提示信息
